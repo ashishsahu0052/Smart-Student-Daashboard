@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #1e90ff;
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .logo-name {
+            font-size: 1.6em;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 1.1em;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #4682b4;
+        }
+
+        /* Profile Page Styles */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-info {
+            flex: 1;
+            text-align: left;
+            padding-right: 30px;
+        }
+
+        .profile-info h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #1e90ff;
+        }
+
+        .profile-info strong {
+            color: #555;
+        }
+
+        .profile-info p {
+            color: #777;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        /* Profile Picture Styling */
+        .profile-picture {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1e90ff;
+            transition: border-color 0.3s ease;
+        }
+
+        .profile-picture:hover {
+            border-color: #4682b4;
+        }
+
+        .profile-picture-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Update Form Styling */
+        .update-form {
+            width: 100%;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            transition: border 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="tel"]:focus,
+        input[type="file"]:focus {
+            border-color: #1e90ff;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.2em;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4682b4;
+        }
+
+        .cancel-btn {
+            background-color: #ff6347;
+            margin-left: 20px;
+        }
+
+        .cancel-btn:hover {
+            background-color: #cc2f1f;
+        }
+
+        .upload-btn {
+            background-color: #ff9900;
+            font-size: 1em;
+        }
+
+        .upload-btn:hover {
+            background-color: #cc7a00;
+        }
+
+        .alert {
+            padding: 12px;
+            background-color: #e6f7ff;
+            border: 1px solid #b0e0e6;
+            border-radius: 6px;
+            margin-top: 20px;
+            color: green;
+            font-size: 1.1em;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo-name">SMART DASHBOARD</div>
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Contact</a>
+            <a href="#">Features</a>
+        </div>
+    </nav>
+
+    <!-- Profile Page -->
+    <div class="container">
+        <!-- Profile Information -->
+        <div class="profile-info">
+            <h2>User Profile</h2>
+            <p><strong>Username:</strong> <span id="username">JohnDoe</span></p>
+            <p><strong>Email:</strong> <span id="email">johndoe@example.com</span></p>
+            <p><strong>Mobile Number:</strong> <span id="mobile">Not Provided</span></p>
+            <button onclick="showUpdateForm()">Update Profile</button>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="profile-picture-container">
+            <img id="profilePic" class="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
+            <br>
+            <button class="upload-btn" onclick="changeProfilePicture()">Change Picture</button>
+        </div>
+    </div>
+
+    <!-- Update Profile Form -->
+    <div id="updateSection" style="display: none;">
+        <div class="container">
+            <div class="update-form">
+                <h3>Update Your Profile</h3>
+                <div class="form-group">
+                    <input type="text" id="newUsername" placeholder="New Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="newEmail" placeholder="New Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="newMobile" placeholder="New Mobile Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="currentPassword" placeholder="Current Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="profileImage" accept="image/*">
+                </div>
+                <button onclick="updateProfile()">Update Profile</button>
+                <button type="button" class="cancel-btn" onclick="cancelUpdate()">Cancel</button>
+                <div id="updateAlert" class="alert" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Form (If no user is logged in) -->
+    <div id="loginSection" style="display: none;">
+        <div class="container">
+            <h3>Login</h3>
+            <div class="form-group">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPassword" placeholder="Password" required>
+            </div>
+            <button onclick="login()">Login</button>
+            <div id="loginAlert" class="alert error" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Check if the user is logged in on page load
+        window.onload = function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                showProfile(user);
+            } else {
+                document.getElementById('loginSection').style.display = 'block';
+            }
+        };
+
+        // Show profile information
+        function showProfile(user) {
+            document.getElementById('username').textContent = user.username;
+            document.getElementById('email').textContent = user.email;
+            document.getElementById('mobile').textContent = user.mobile || 'Not provided';
+            document.getElementById('profilePic').src = user.profilePic || 'https://via.placeholder.com/150';
+            document.getElementById('loginSection').style.display = 'none';
+        }
+
+        // Show update form
+        function showUpdateForm() {
+            document.getElementById('updateSection').style.display = 'block';
+        }
+
+        // Cancel profile update and return to profile section
+        function cancelUpdate() {
+            document.getElementById('updateSection').style.display = 'none';
+        }
+
+        // Upload Profile Picture
+        function changeProfilePicture() {
+            const fileInput = document.getElementById('profileImage');
+            fileInput.click();
+        }
+
+        // Upload the new profile picture when selected
+        document.getElementById('profileImage').addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    document.getElementById('profilePic').src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Update profile information
+        function updateProfile() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const newUsername = document.getElementById('newUsername').value;
+            const newEmail = document.getElementById('newEmail').value;
+            const newMobile = document.getElementById('newMobile').value;
+            const currentPassword = document.getElementById('currentPassword').value;
+
+            // Verify current password
+            if (currentPassword !== user.password) {
+                document.getElementById('updateAlert').textContent = 'Incorrect password. Please try again.';
+                document.getElementById('updateAlert').style.display = 'block';
+                return;
+            }
+
+            // Update user profile information
+            user.username = newUsername;
+            user.email = newEmail;
+            user.mobile = newMobile;
+
+            // Save the updated user object to localStorage
+            localStorage.setItem('user', JSON.stringify(user));
+
+            // Display updated profile
+            showProfile(user);
+
+            // Show success message
+            document.getElementById('updateAlert').textContent = 'Profile updated successfully!';
+            document.getElementById('updateAlert').style.display = 'block';
+        }
+
+        // Handle login
+        function login() {
+            const loginEmail = document.getElementById('loginEmail').value;
+            const loginPassword = document.getElementById('loginPassword').value;
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (user && user.email === loginEmail && user.password === loginPassword) {
+                showProfile(user);
+            } else {
+                document.getElementById('loginAlert').textContent = 'Invalid email or password.';
+                document.getElementById('loginAlert').style.display = 'block';
+            }
+        }
+
+        // For testing, simulate a user registration
+        function registerUser(username, email, password) {
+            const user = {
+                username: username,
+                email: email,
+                password: password,
+                profilePic: '',
+                mobile: ''
+            };
+            localStorage.setItem('user', JSON.stringify(user));
+        }
+
+        // Register a test user if not already registered (Remove in production)
+        if (!localStorage.getItem('user')) {
+            registerUser('JohnDoe', 'johndoe@example.com', 'password123');
+        }
+    </script>
+</body>
+</html>

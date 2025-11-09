@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Material Upload</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff; /* Soft sky-blue background */
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #1e90ff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav img {
+            height: 40px; /* Adjust logo size */
+            margin-right: 10px;
+        }
+
+        nav .logo-name {
+            font-size: 1.6em;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            margin: 0 10px;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            background-color: #4682b4; /* Darker blue on hover */
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #1e90ff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Container Styles */
+        .upload-container, .search-container {
+            margin: 20px 0;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-container {
+            background-color: #e6f7ff;
+        }
+
+        /* Form Styles */
+        input[type="text"], input[type="file"] {
+            padding: 12px;
+            font-size: 1.1em;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 2px solid #b0e0e6;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="file"]:focus {
+            border-color: #1e90ff;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.2em;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4682b4;
+        }
+
+        /* File List Styles */
+        .file-list {
+            margin-top: 30px;
+            text-align: left;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .file-list li {
+            padding: 15px;
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .file-list li:hover {
+            background-color: #e6f7ff;
+        }
+
+        .file-list strong {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .file-list small {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .file-list a {
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .file-list a:hover {
+            text-decoration: underline;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* Embedded Document Styles */
+        .embedded-doc {
+            margin-top: 20px;
+            width: 80%;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            overflow: auto;
+            position: relative;
+            display: none; /* Hidden by default */
+        }
+
+        /* Close Button Styles */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2em;
+            color: #ff0000;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 100; /* Ensure it stays on top */
+        }
+
+        .close-btn:hover {
+            color: #cc0000;
+        }
+
+        /* Search Box Styles */
+        .search-container input[type="text"] {
+            width: 60%;
+            margin-bottom: 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div style="display: flex; align-items: center;">
+            <img src="daksha3.png" alt="Logo"> <!-- Replace with your logo -->
+            <div class="logo-name">SMART DASHBOARD</div>
+        </div>
+        <div>
+            <a href="main.html">Home</a>
+            <a href="help.html">Contact</a>
+            <a href="features.html">Features</a>
+        </div>
+    </nav>
+
+    <h1>Study Material Upload</h1>
+
+    <div class="upload-container">
+        <h3>Upload Your Study Material</h3>
+        <input type="text" id="materialTitle" placeholder="Title of the material" required>
+        <input type="file" id="fileUpload" accept=".pdf, .docx, .txt, .pptx" required>
+        <input type="text" id="tagsInput" placeholder="Enter tags (comma separated)" required>
+        <button onclick="uploadMaterial()">Upload</button>
+    </div>
+
+    <div class="search-container">
+        <h3>Search Study Materials</h3>
+        <input type="text" id="searchInput" placeholder="Search by title or tags" onkeyup="searchMaterial()">
+    </div>
+
+    <div class="file-list">
+        <h3>Your Uploaded Materials</h3>
+        <ul id="materialList"></ul>
+    </div>
+
+    <!-- Embedded document container -->
+    <div id="documentViewer" class="embedded-doc">
+        <button class="close-btn" onclick="closeDocument()">X</button>
+        <div id="documentContent"></div>
+    </div>
+
+    <script>
+        // Load materials from localStorage when the page loads
+        window.onload = function() {
+            displayMaterials();
+        };
+
+        // Function to upload a study material
+        function uploadMaterial() {
+            let title = document.getElementById('materialTitle').value;
+            let file = document.getElementById('fileUpload').files[0];
+            let tags = document.getElementById('tagsInput').value.split(',').map(tag => tag.trim());
+
+            if (!title || !file || !tags) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Convert file to base64 (string format)
+            let reader = new FileReader();
+            reader.onloadend = function () {
+                const material = {
+                    title: title,
+                    fileName: file.name,
+                    fileSize: file.size,
+                    fileType: file.type,
+                    tags: tags,
+                    lastModified: file.lastModified,
+                    fileURL: reader.result, // Store base64 encoded file
+                    fileType: file.type
+                };
+
+                // Save the material to localStorage
+                let materials = JSON.parse(localStorage.getItem('materials')) || [];
+                materials.push(material);
+                localStorage.setItem('materials', JSON.stringify(materials));
+
+                // Reset form fields
+                document.getElementById('materialTitle').value = '';
+                document.getElementById('tagsInput').value = '';
+                document.getElementById('fileUpload').value = '';
+
+                // Update the material list
+                displayMaterials();
+            };
+
+            reader.readAsDataURL(file); // Convert file to base64 format
+        }
+
+        // Function to display the list of uploaded materials
+        function displayMaterials() {
+            let materials = JSON.parse(localStorage.getItem('materials')) || [];
+            let materialList = document.getElementById('materialList');
+            materialList.innerHTML = ''; // Clear existing list
+
+            materials.forEach((material, index) => {
+                let listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <strong>${material.title}</strong><br>
+                    <small>Tags: ${material.tags.join(', ')}</small><br>
+                    <a href="#" onclick="openMaterial('${material.fileURL}', '${material.fileType}')">Open Document</a>
+                    <button class="delete-btn" onclick="deleteMaterial(${index})">Delete</button>
+                `;
+                materialList.appendChild(listItem);
+            });
+        }
+
+        // Function to delete a material
+        function deleteMaterial(index) {
+            let materials = JSON.parse(localStorage.getItem('materials')) || [];
+            materials.splice(index, 1); // Remove the material at the specified index
+            localStorage.setItem('materials', JSON.stringify(materials)); // Save updated list
+            displayMaterials(); // Re-display the list after deletion
+        }
+
+        // Function to search materials by title or tags
+        function searchMaterial() {
+            let searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            let materials = JSON.parse(localStorage.getItem('materials')) || [];
+            let filteredMaterials = materials.filter(material =>
+                material.title.toLowerCase().includes(searchQuery) || 
+                material.tags.some(tag => tag.toLowerCase().includes(searchQuery))
+            );
+            displayFilteredMaterials(filteredMaterials);
+        }
+
+        // Function to display filtered materials
+        function displayFilteredMaterials(filteredMaterials) {
+            let materialList = document.getElementById('materialList');
+            materialList.innerHTML = ''; // Clear existing list
+
+            filteredMaterials.forEach(material => {
+                let listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <strong>${material.title}</strong><br>
+                    <small>Tags: ${material.tags.join(', ')}</small><br>
+                    <a href="#" onclick="openMaterial('${material.fileURL}', '${material.fileType}')">Open Document</a>
+                    <button class="delete-btn" onclick="deleteMaterial(${index})">Delete</button>
+                `;
+                materialList.appendChild(listItem);
+            });
+        }
+
+        // Function to open a material in the same window
+        function openMaterial(fileURL, fileType) {
+            let documentViewer = document.getElementById('documentViewer');
+            let documentContent = document.getElementById('documentContent');
+            documentViewer.style.display = 'block'; // Show document viewer
+
+            // Handle different file types (PDF, DOCX, etc.)
+            if (fileType === 'application/pdf') {
+                documentContent.innerHTML = `<iframe src="${fileURL}" width="100%" height="100%" frameborder="0"></iframe>`;
+            } else if (fileType === 'application/msword' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+                documentContent.innerHTML = `<iframe src="https://docs.google.com/gview?url=${fileURL}&embedded=true" width="100%" height="100%" frameborder="0"></iframe>`;
+            } else {
+                documentContent.innerHTML = `<p>File type not supported for display.</p>`;
+            }
+        }
+
+        // Function to close the document viewer
+        function closeDocument() {
+            let documentViewer = document.getElementById('documentViewer');
+            documentViewer.style.display = 'none'; // Hide document viewer
+        }
+    </script>
+</body>
+</html>
