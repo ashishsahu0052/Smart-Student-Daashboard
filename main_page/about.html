@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Dashboard</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial;
+        background: #f4f7fb;
+      }
+
+      /* NAVBAR */
+      .nav {
+        background: #1e90ff;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 30px;
+        color: white;
+      }
+
+      .nav-links a {
+        margin-left: 15px;
+        color: white;
+        text-decoration: none;
+      }
+
+      .nav-links button {
+        margin-left: 15px;
+        padding: 8px 15px;
+        border: none;
+        background: white;
+        color: #1e90ff;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* FEATURES SECTION */
+      .features-section {
+        padding: 60px 20px;
+      }
+
+      .features-container {
+        max-width: 1000px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .features-container h2 {
+        text-align: center;
+        color: #1e90ff;
+        margin-bottom: 30px;
+      }
+
+      .feature-box {
+        margin-bottom: 25px;
+        padding: 15px;
+        border-left: 5px solid #1e90ff;
+        background: #f9f9f9;
+        border-radius: 6px;
+      }
+
+      .feature-box h3 {
+        margin-bottom: 10px;
+      }
+
+      .feature-box p {
+        margin: 5px 0;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .features-container {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div class="nav">
+      <div class="logo">DAKSHA</div>
+
+      <div class="nav-links">
+        <a href="main.html">Home</a>
+        <a href="#">About</a>
+        <a href="features.html">Services</a>
+        <a href="help.html">Contact</a>
+        <button id="logoutBtn">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- FEATURES MANUAL SECTION -->
+    <div class="features-section">
+      <div class="features-container">
+        <h2>Features Guide (User Manual)</h2>
+
+        <!-- WHITEBOARD -->
+        <div class="feature-box">
+          <h3>Whiteboard</h3>
+          <p>
+            <strong>Purpose:</strong> Used for drawing, writing notes, and
+            brainstorming ideas.
+          </p>
+          <p><strong>How to Use:</strong></p>
+          <p>- Open the Whiteboard feature</p>
+          <p>- Use mouse or touch to draw</p>
+          <p>- Create diagrams or write notes</p>
+          <p>- Useful for study and teaching</p>
+        </div>
+
+        <!-- CHATBOT -->
+        <div class="feature-box">
+          <h3>AI Chatbot</h3>
+          <p>
+            <strong>Purpose:</strong> Ask questions and get instant answers
+            using AI.
+          </p>
+          <p><strong>How to Use:</strong></p>
+          <p>- Type your question in the input box</p>
+          <p>- Click send or press Enter</p>
+          <p>- View AI-generated response</p>
+          <p>- Use for learning, coding help, or explanations</p>
+        </div>
+
+        <!-- PDF CONVERTER -->
+        <div class="feature-box">
+          <h3>PDF Converter</h3>
+          <p><strong>Purpose:</strong> Convert files into PDF format.</p>
+          <p><strong>How to Use:</strong></p>
+          <p>- Upload your file</p>
+          <p>- Click convert button</p>
+          <p>- Download the PDF file</p>
+        </div>
+
+        <!-- TODO LIST -->
+        <div class="feature-box">
+          <h3>To-Do List</h3>
+          <p><strong>Purpose:</strong> Manage daily tasks.</p>
+          <p><strong>How to Use:</strong></p>
+          <p>- Add tasks</p>
+          <p>- Mark tasks as completed</p>
+          <p>- Delete tasks when done</p>
+        </div>
+
+        <!-- CALCULATOR -->
+        <div class="feature-box">
+          <h3>Calculator</h3>
+          <p><strong>Purpose:</strong> Perform mathematical calculations.</p>
+          <p><strong>How to Use:</strong></p>
+          <p>- Enter numbers and operations</p>
+          <p>- Get instant result</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGN OUT SCRIPT -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+      import {
+        getAuth,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAwGcx4ZovfBjBdQjZr0TLVDAWsDOP3MxM",
+        authDomain: "smart-student-dashboard-0.firebaseapp.com",
+        projectId: "smart-student-dashboard-0",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // LOGOUT
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", async () => {
+          await signOut(auth);
+          alert("Logged out");
+          window.location.href = "login.html";
+        });
+    </script>
+  </body>
+</html>
