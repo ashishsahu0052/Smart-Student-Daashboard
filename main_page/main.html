@@ -150,6 +150,28 @@
         </div>
       </div>
     </footer>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "smart-student-dashboard-0.firebaseapp.com",
+        projectId: "smart-student-dashboard-0",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          window.location.href = "login.html";
+        }
+      });
+    </script>
     <script src="signOut.js"></script>
   </body>
 </html>
