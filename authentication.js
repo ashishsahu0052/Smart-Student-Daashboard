@@ -41,7 +41,7 @@ document.getElementById("submit").addEventListener("click", async () => {
         alert("Login successful");
 
         // redirect
-        window.location.href = "main.html";
+        window.location.href = "./main.html";
       } catch (loginError) {
         alert("Wrong password or user not found");
       }
