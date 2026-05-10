@@ -24,7 +24,7 @@ async function generateResponse(aiChatBox) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-goog-api-key": "AIzaSyA_FyFkafi5RWCEjlwfOUcHuox879EFcdk", 
+      "x-goog-api-key": "AIzaSyAy0ONwSKT8oCPadJmg5tH2bCnR7nN9y9I",
     },
     body: JSON.stringify({
       contents: [
